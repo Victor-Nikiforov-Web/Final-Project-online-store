@@ -9,7 +9,7 @@
 - Add products to cart
 - Manage your cart
 - Payment page
-- download receipt
+- Download receipt
 
 #### Admin UI :
 - Manage products
