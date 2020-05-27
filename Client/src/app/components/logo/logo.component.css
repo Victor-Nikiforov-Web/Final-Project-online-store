@@ -14,7 +14,7 @@ div {
 .textImage {
     position: absolute;
     top: 150px;
-    left: 550px;
+    left: 37%;
     background: #EFE9F4;
     padding: 60px;
     border: 5px solid #03829d;
@@ -37,7 +37,7 @@ h1 {
 .row {
     position: absolute;
     top: 400px;
-    left: 500px;
+    left: 34%;
     width: 800px;
 }
 
