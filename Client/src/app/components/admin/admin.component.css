@@ -1,0 +1,49 @@
+div{
+    text-align: center;
+}
+
+img{
+    height: 40px ;
+}
+table, td, th {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 60%;
+    margin: 0 auto 0 auto;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 15px;
+}
+
+th {
+    background: #2D2D2A;
+    color: whitesmoke;
+    font-weight: 500;
+}
+input, select {
+    width: 300px;
+}
+
+label {
+    text-align: end;
+    margin-top: 5px;
+    font-weight: 500;
+}
+.form-group {
+    margin: 0 auto 0 auto;
+    padding: 10px;
+}
+
+h1{
+    text-align: center;
+}
+
+button {
+    margin: 10px;
+}

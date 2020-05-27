@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!-- <a class="navbar-brand" routerLink='/home'>Online Store</a> -->
+    <a class="navbar-brand" routerLink='/home'>Online Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+            <p class="nav-link" *ngIf='!user'>Hello guest ! </p>
+            <p class="nav-link" *ngIf='user'>Hello {{user.firstName}}</p>
+        </li>
+        </ul>
+    </div>
+    
+    <form #myLoginForm='ngForm' class="form-inline" *ngIf='!user'>
+        <label>
+            <input class="form-control" type="email" name='email' placeholder="Email" required minlength='4' #emailInput='ngModel'
+                [(ngModel)]='loginForm.email' email='true'>
+            <mat-error *ngIf="emailInput.errors?.required && emailInput.touched">Missing Email</mat-error>
+            <mat-error *ngIf="emailInput.errors?.email && emailInput.touched">Enter valid email !</mat-error>
+        </label>
+        <label>
+            <input class="form-control" type="password" name='password' placeholder="Password" required minlength='4'
+                #passwordInput='ngModel' [(ngModel)]='loginForm.password'>
+            <mat-error *ngIf="passwordInput.errors?.required && passwordInput.touched">Missing password</mat-error>
+            <mat-error *ngIf="passwordInput.errors?.minlength && passwordInput.touched">Password too short
+            </mat-error>
+        </label>
+        <button type="button" class="btn btn-light" [disabled]="myLoginForm.form.invalid" (click)='login()'>Login</button>
+    <a routerLink="/register">
+        <button type="button" class="btn btn-dark">Register</button>
+    </a>
+    </form>
+    <button type="button" class="btn btn-danger" (click)='logout()' *ngIf='user'>Logout</button>
+  </nav>

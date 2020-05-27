@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+div {
+    border-right: 1px solid #ccc9c9;
+    border-bottom: 1px solid #ccc9c9;
+    display: inline-block;
+    padding: 30px;
+    width: 200px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+img {
+    height: 100px;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+    width: 40px;
+    text-align: end;
+}
+
+::ng-deep input.form-control {
+    width: 20%;
+    margin:10px auto 10px auto;
+}
+
+::ng-deep .searchDiv {
+    border-bottom: 1px solid #BFD7B5;
+    border-top: 1px solid #BFD7B5;
+    margin: 10px;
+    padding: 5px;
+}

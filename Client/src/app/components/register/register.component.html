@@ -1,0 +1,92 @@
+<div>
+    <h1>Register</h1>
+    <hr>
+    <form #registerFormOne="ngForm" id='firstForm'>
+        <hr>
+        <label class="form-group col-md-8 row">
+            <p class="col-md-4">ID </p>
+            <input class="form-control col-md-4" type="number" name="id" [(ngModel)]='user.id' required minlength="6"
+                maxlength="10" #idInfo="ngModel">
+            <mat-error *ngIf="idInfo.errors?.required && idInfo.touched">Missing ID</mat-error>
+            <mat-error *ngIf="idInfo.errors?.minlength && idInfo.touched">ID too short</mat-error>
+            <mat-error *ngIf="idInfo.errors?.idTaken">id is already taken</mat-error>
+        </label>
+        <br>
+        <label class="form-group col-md-8 row">
+            <p class="col-md-4">Email </p>
+            <input class="form-control col-md-4" type="email" name="email" [(ngModel)]='user.email' #emailInfo="ngModel"
+                minlength='6' required email="true">
+            <mat-error *ngIf="emailInfo.errors?.required && emailInfo.touched">Missing Email</mat-error>
+            <mat-error *ngIf="emailInfo.errors?.email && emailInfo.touched">Enter valid email !</mat-error>
+            <mat-error *ngIf="emailInfo.errors?.emailTaken">Email is already taken</mat-error>
+        </label>
+        <br>
+        <label class="form-group col-md-8 row">
+            <p class="col-md-4">Password </p>
+            <input class="form-control col-md-4" type="password" name="password" [(ngModel)]='user.password' required
+                #passwordInfo="ngModel" minlength='4' maxlength='40'>
+            <mat-error *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Missing password</mat-error>
+            <mat-error *ngIf="passwordInfo.errors?.minlength && passwordInfo.touched">Password too short</mat-error>
+        </label>
+        <br>
+        <label class="form-group col-md-8 row">
+            <p class="col-md-4">Password verification </p>
+            <input class="form-control col-md-4" type="password" name="verification" [(ngModel)]='verificationPassword'
+                #verificationInfo="ngModel" required minlength='4' (input)='checkPassword(registerFormOne)'>
+            <mat-error *ngIf="verificationInfo.errors?.required && verificationInfo.touched">Missing password
+            </mat-error>
+            <mat-error *ngIf="verificationInfo.errors?.minlength && verificationInfo.touched">Password too short
+            </mat-error>
+            <mat-error *ngIf='verificationInfo.errors?.passwordMatch && verificationInfo.touched'>passwords not match
+            </mat-error>
+        </label>
+        <hr>
+        <button type="button" class="btn btn-info" [disabled]="registerFormOne.form.invalid"
+            (click)='checkForm(registerFormOne)'>Continue</button>
+    </form>
+</div>
+<mat-spinner *ngIf='spinner'></mat-spinner>
+<div>
+    <form #registerFormTwo="ngForm" id='secForm'>
+        <hr>
+        <label class="form-group col-md-8 row">
+            <p class="col-md-4">City </p>
+            <select class="custom-select col-md-4" name='selectCity' #selectCityInfo='ngModel' [(ngModel)]='user.city'
+                required>
+                <option *ngFor='let c of cities' value={{c}} name='citiesSelect'>{{c}}</option>
+            </select>
+            <mat-error *ngIf="selectCityInfo.errors?.undefined">Select City !</mat-error>
+        </label>
+        <br>
+        <label class="form-group col-md-8 row">
+            <p class="col-md-4">Street </p>
+            <input class="form-control col-md-4" type="text" name="street" [(ngModel)]='user.street'
+                #streetInfo="ngModel" minlength='3' maxlength='40' required>
+            <mat-error *ngIf="streetInfo.errors?.required && streetInfo.touched">Missing Street !</mat-error>
+            <mat-error *ngIf="streetInfo.errors?.minlength && streetInfo.touched">At least 3 letters</mat-error>
+        </label>
+        <br>
+        <label class="form-group col-md-8 row">
+            <p class="col-md-4">First Name </p>
+            <input class="form-control col-md-4" type="text" name="firstName" [(ngModel)]='user.firstName' required
+                #firstNameInfo="ngModel" minlength='2' maxlength='20' pattern="[a-zA-Z ]*">
+            <mat-error *ngIf="firstNameInfo.errors?.required && firstNameInfo.touched">Missing first name</mat-error>
+            <mat-error *ngIf="firstNameInfo.errors?.minlength && firstNameInfo.touched">At least 2 letters</mat-error>
+            <mat-error *ngIf="firstNameInfo.errors?.pattern && firstNameInfo.touched">Numbers are not allowed
+            </mat-error>
+        </label>
+        <br>
+        <label class="form-group col-md-8 row">
+            <p class="col-md-4">Last Name </p>
+            <input class="form-control col-md-4" type="text" name="lastName" [(ngModel)]='user.lastName' required
+                #lastNameInfo="ngModel" minlength='2' maxlength='20' pattern="[a-zA-Z ]*">
+            <mat-error *ngIf="lastNameInfo.errors?.required && lastNameInfo.touched">Missing Last name</mat-error>
+            <mat-error *ngIf="lastNameInfo.errors?.minlength && lastNameInfo.touched">At least 2 letters</mat-error>
+            <mat-error *ngIf="lastNameInfo.errors?.pattern && lastNameInfo.touched">Numbers are not allowed</mat-error>
+        </label>
+        <br>
+        <hr>
+        <button type="button" class="btn btn-success" [disabled]="registerFormTwo.form.invalid"
+            (click)='sendForm(registerFormTwo)'>Finish</button>
+    </form>
+</div>

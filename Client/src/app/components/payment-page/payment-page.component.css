@@ -1,0 +1,76 @@
+div {
+    text-align: center;
+}
+
+.payment-div {
+    margin-top: 10px;
+}
+
+table, td, th {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 15px;
+}
+
+th {
+    background: #2D2D2A;
+    color: whitesmoke;
+    font-weight: 500;
+}
+
+#total-price-td {
+    background-color: #101935;
+    color: whitesmoke;
+    font-weight: 500;
+}
+
+input, select {
+    width: 300px;
+}
+
+label {
+    text-align: end;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+hr {
+    width: 300px;
+}
+
+mat-error {
+    margin-left: 60%;
+}
+
+.marked {
+    background-color: yellow;
+}
+
+::ng-deep svg.mat-datepicker-toggle-default-icon.ng-star-inserted {
+    font-size: 50px;
+}
+
+::ng-deep .mat-form-field-wrapper.ng-tns-c66-0 {
+    width: 150px;
+}
+
+::ng-deep .busy-day {
+    background: red;
+    border-radius: 100%;
+    pointer-events: none;
+}
+
+.finalDiv {
+    background: #e0dddd;
+    padding: 100px;
+    margin: 30px;
+}

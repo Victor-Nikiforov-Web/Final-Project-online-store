@@ -1,0 +1,46 @@
+div {
+    text-align: center;
+}
+
+select{
+    border: 1px solid #ced4da!important;
+}
+
+form > hr {
+    border: none;
+    background: white;
+    height: 1px;
+}
+
+mat-error{
+    margin: 10px;
+    color: red;
+}
+
+#secForm{
+    display: none ;
+}
+
+mat-spinner.mat-spinner.mat-progress-spinner.mat-primary.mat-progress-spinner-indeterminate-animation{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+select{
+    border: none;
+    border-radius: 10px;
+}
+
+input, select {
+    width: 300px!important;
+    margin: 0!important;
+}
+
+label {
+    text-align: end;
+    margin-top: 5px!important;
+    font-weight: 500;
+}
+label.form-group.col-md-8.row {
+    margin: 0 auto 0 auto;
+}

@@ -1,0 +1,35 @@
+<div>
+    <!-- Search div --->
+    <div class='searchDiv'>
+        <input type="text" [(ngModel)]='searchStr' #searchInput='ngModel' placeholder="search for product .."
+            class="form-control">
+        <button type="button" class="btn btn-primary" *ngIf='searchStr' (click)='searchProduct()'>Search</button>
+        <button type="button" class="btn btn-dark" *ngIf='searchStatus' (click)='backToAllProducts()'>Back to all
+            products</button>
+    </div>
+    <div class='products' id="productsDiv" *ngIf='searchStatus'>
+        <app-product *ngFor='let p of searchProducts' imageSrc="http://localhost:3000/api/products/image/{{p.img}}" productName={{p.name}}
+            productPrice={{p.price}} productId={{p._id}}></app-product>
+            <h3 *ngIf='searchProducts.length === 0 && searchStatus'>No result !</h3>
+    </div>
+    <!-- End of Search-->
+    <div class='products' id="productsDiv" *ngIf='!searchStatus'>
+        <mat-tab-group>
+            <mat-tab label="Dairy products">
+                <app-product *ngFor='let p of dairyProducts' imageSrc="http://localhost:3000/api/products/image/{{p.img}}"
+                    productName={{p.name}} productPrice={{p.price}} productId={{p._id}}></app-product>
+            </mat-tab>
+            <mat-tab label="Meat & Fish">
+                <app-product *ngFor='let p of meatAndFish' imageSrc="http://localhost:3000/api/products/image/{{p.img}}"
+                    productName={{p.name}} productPrice={{p.price}} productId={{p._id}}></app-product>
+            </mat-tab>
+            <mat-tab label="Fruits and Vegetables">
+                <app-product *ngFor='let p of fruitsAndVegetables' imageSrc="http://localhost:3000/api/products/image/{{p.img}}"
+                    productName={{p.name}} productPrice={{p.price}} productId={{p._id}}></app-product>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="shoppingCart">
+        <app-shopping-cart></app-shopping-cart>
+    </div>
+</div>

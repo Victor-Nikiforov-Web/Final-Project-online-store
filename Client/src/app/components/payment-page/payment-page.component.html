@@ -1,0 +1,90 @@
+<div class="col-md-12" *ngIf='user && !paymentComplete'>
+    <button type="button" class="btn btn-success" style="margin: 5px;" (click)='routeToHome()'>Back to shopping</button>
+</div>
+<div class="payment-page row col-md-12 container" *ngIf='user && !paymentComplete'>
+    <div class="receipt col-md-6">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" aria-label="Search" (input)="searchProduct()"
+                aria-describedby="button-addon2" required #searchProductInput='ngModel' [(ngModel)]='searchStr'>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>amount</th>
+                    <th>price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let p of products'>
+                    <td>
+                        <p id={{p.name}}>{{p.name}}</p>
+                    </td>
+                    <td>{{p.amount}}</td>
+                    <td>{{p.price|currency}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" id="total-price-td">Total Price : {{this.order.totalPrice|currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="payment-div col-md-6">
+        <form #paymentForm='ngForm'>
+            <h3>Shipping Details :</h3>
+            <hr>
+            <div class="form-group col-md-12 row">
+                <label class="col-md-6">City</label>
+                <select name='citiesSelect' #selectedCity='ngModel' [(ngModel)]='order.city' class="custom-select"
+                    id="inputGroupSelect01 col-md-6" required>
+                    <option *ngFor='let c of cities' value={{c}} name='citiesSelect'>{{c}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-12 row">
+                <label class="col-md-6">Street</label>
+                <input class="form-control col-md-6" type="text" name="street" [(ngModel)]='order.street'
+                    #streetInfo="ngModel" minlength='3' maxlength='30' required>
+                <mat-error *ngIf="streetInfo.errors?.required && streetInfo.touched">Missing Street !</mat-error>
+                <mat-error *ngIf="streetInfo.errors?.minlength && streetInfo.touched">At least 3 letters</mat-error>
+            </div>
+            <div class="form-group col-md-12 row">
+                <label class="col-md-6">Shipping Date</label>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" (ngModelChange)='dateValidator(paymentForm,$event)'
+                        [(ngModel)]='order.shippingDate' #datepickerInput='ngModel' name="datepicker" disabled required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker disabled="false" [dateClass]="dateClass()" #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-error *ngIf="datepickerInput.errors?.required && datepickerInput.touched">Missing date !
+                </mat-error>
+                <mat-error *ngIf="datepickerInput.errors?.invalid_Date && datepickerInput.touched">Invalid date
+                </mat-error>
+            </div>
+            <h3>Payments :</h3>
+            <hr>
+            <div class="form-group col-md-12 row">
+                <label class="col-md-6">Credit card</label>
+                <input type="text" class="form-control col-md-6" name="creditCard" required maxlength='16'
+                    #creditCardInput='ngModel' [(ngModel)]='order.creditCard'
+                    pattern='^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$'>
+                <mat-error *ngIf="creditCardInput.errors?.required && creditCardInput.touched">Missing credit card !
+                </mat-error>
+                <mat-error *ngIf="creditCardInput.errors?.minlength && creditCardInput.touched">You need at least 16
+                    characters</mat-error>
+                <mat-error *ngIf="creditCardInput.errors?.pattern&& creditCardInput.touched">
+                    Invalid credit card number(regex for visa master card)</mat-error>
+            </div>
+            <button type="button" class="btn btn-primary"
+                [disabled]="paymentForm.form.invalid "
+                (click)='sendOrder()'>Order</button>
+        </form>
+    </div>
+</div>
+
+<div class="finalDiv" *ngIf='paymentComplete'>
+    <h3>Your purchase was successful !</h3>
+    <a [href]='path + filePath' download="receipt.txt" target="_blank">To download the receipt, click here</a>
+    <br><br>
+    <button type="button" class="btn btn-success" style="margin: 5px;" (click)='routeToHome()'>Back to homepage</button>
+</div>

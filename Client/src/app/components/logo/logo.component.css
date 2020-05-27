@@ -1,0 +1,46 @@
+img {
+    height: 500px;
+    width: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div {
+    text-align: center;
+}
+
+.textImage {
+    position: absolute;
+    top: 150px;
+    left: 550px;
+    background: #EFE9F4;
+    padding: 60px;
+    border: 5px solid #03829d;
+    box-shadow: 4px 5px 6px 1px #c7c7c7;
+}
+
+p {
+    margin: 0;
+    border-top: 1px solid #d8d5da;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 17px;
+    color: #6b696d;
+}
+
+h1 {
+    color: #15ceb9;
+}
+
+.row {
+    position: absolute;
+    top: 400px;
+    left: 500px;
+    width: 800px;
+}
+
+.alert {
+    margin: 10px;
+}

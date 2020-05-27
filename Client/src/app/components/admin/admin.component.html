@@ -1,0 +1,61 @@
+<h1>Admin Panel</h1>
+    <hr>
+<div *ngIf='!newProduct && !editProduct'>
+    <button type="button" class="btn btn-info" (click)='goToAddProduct()'>Add Product</button>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let p of products'>
+                <td>{{p.name}}</td>
+                <td>{{p.price}}</td>
+                <td><img src="http://localhost:3000/api/products/image/{{p.img}}" alt=''></td>
+                <td>
+                    <button mat-raised-button (click)='goToEditProduct(p._id)'>Edit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <form #productForm='ngForm' *ngIf='newProduct || editProduct'>
+        <div class="form-group col-md-8 row">
+            <label class="col-md-4">Name</label>
+            <input class="form-control col-md-4" type="text" name="name" [(ngModel)]='product.name'
+                #productName="ngModel" minlength='3' maxlength='30' required>
+            <mat-error *ngIf="productName.errors?.required && productName.touched">Missing Name !</mat-error>
+            <mat-error *ngIf="productName.errors?.minlength && productName.touched">At least 3 letters</mat-error>
+        </div>
+        <div class="form-group col-md-8 row">
+            <label class="col-md-4">Price</label>
+            <input class="form-control col-md-4" type="number" name="price" [(ngModel)]='product.price'
+                #productPrice="ngModel" minlength='3' maxlength='30' required>
+            <mat-error *ngIf="productPrice.errors?.required && productPrice.touched">Missing price !</mat-error>
+        </div>
+        <div class="form-group col-md-8 row">
+            <label class="col-md-4">Category</label>
+            <select name='category' #productCategory='ngModel' [(ngModel)]='product.categoryId' class="custom-select"
+                id="inputGroupSelect01 col-md-4" required>
+                <option *ngFor='let c of categories' value={{c._id}} name='citiesSelect'>{{c.name}}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-8 row">
+            <label class="col-md-4">Image</label>
+            <input class="form-control col-md-4" type="file" name="imageFile" (input)='updateImg($event)'
+             accept="image/*" multiple="multiple">
+        </div>
+        <button type="button" class="btn btn-danger" (click)='goBack()'>Go back</button>
+        <button class="btn btn-dark" *ngIf='editProduct' type="button" (click)='updateProduct()'
+        [disabled]="productForm.form.invalid">Update</button>
+        <button class="btn btn-dark" *ngIf='newProduct' type="button" (click)='addProduct()'
+        [disabled]="productForm.form.invalid">Add</button>
+    </form>
+</div>

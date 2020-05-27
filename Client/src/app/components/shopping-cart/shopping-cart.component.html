@@ -1,0 +1,43 @@
+<div class="shoppingCartDiv" *ngIf='shoppingCartOpen'>
+    <li class="list-group-item active">
+        Shopping Cart <span *ngIf='user' class="badge badge-light">{{shoppingCartProducts.length}}</span>
+        <span class="material-icons" id='closeBtnCart' (click)='collapse()'>highlight_off</span>
+    </li>
+    <div class="cart">
+        <p *ngIf='!user'>Please Login / Register .</p>
+        <p *ngIf='!shoppingCartProducts && user && !cartOption'>Your shopping cart is empty</p>
+        <div *ngIf='cartOption && user'>
+            <br>
+            <button type="button" class="btn btn-info" (click)='continueShopping()'>Continue shopping with the previous
+                cart</button>
+            <br><br>
+            <button type="button" class="btn btn-secondary" (click)='clearCart()'>New cart</button>
+        </div>
+        <div class="list-group" *ngIf='user && !cartOption'>
+            <button type="button" class="list-group-item list-group-item-action" *ngFor="let p of shoppingCartProducts">
+                <img src='http://localhost:3000/api/products/image/{{p.name}}.png'>
+                <p>{{p.name}}</p>
+                <span class="badge badge-primary badge-pill">{{p.amount}} pcs</span>
+                <p>{{p.price | currency}}</p>
+                <span aria-hidden="true" id='closeBtn' (click)='removeProductFromCart(p._id)'>&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+<li *ngIf='shoppingCartOpen && user && !cartOption' class="list-group-item active" id="endOfCart">
+    <div class="row">
+        <button type="button" *ngIf='shoppingCartProducts.length !== 0' class="btn btn-warning col-md-4"
+            (click)='clearCart()'>Clear cart</button>
+        <p class="col-md-4" *ngIf='shoppingCartProducts.length !== 0'>Total Price : {{totalPrice | currency}}</p>
+        <a class=" col-md-4" routerLink="/payment" *ngIf='shoppingCartProducts.length !== 0'>
+            <button type="button" class="btn btn-success">Purchase</button>
+        </a>
+
+    </div>
+</li>
+<div class="shoppingCartDivClosed" *ngIf='!shoppingCartOpen'>
+    <li class="list-group-item active">
+        Shopping Cart
+        <span class="material-icons" id='closeBtnCart' (click)='collapse()'>add_circle_outline</span>
+    </li>
+</div>
