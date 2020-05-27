@@ -1,6 +1,13 @@
 # Online Store
 `Angular & NodeJS & MongoDB`
 
+###### Technologies:
+`express` `express-fileupload` `uuid` `mongoose` `JWT` 
+
+`crypto-password hash`
+
+`angular-9` `material` `bootstrap` `redux`
+
 ------------
 
 #### User UI:
